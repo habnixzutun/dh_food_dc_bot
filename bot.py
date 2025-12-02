@@ -25,7 +25,7 @@ async def food_command(interaction: discord.Interaction):
     if weekday > 4:
         timedelta = 1
         weekday = 0
-    food_plan = get_week_data(get_week_source(datetime.date.today() + datetime.timedelta(days=timedelta)))
+    food_plan = get_week_data(get_week_source(datetime.date.today() + datetime.timedelta(weeks=timedelta)))
     message = ""
     message += "***" + calendar.day_name[weekday] + "***\n"
     food_plan_day = food_plan[weekday + 1]
@@ -47,7 +47,7 @@ async def food_next_command(interaction: discord.Interaction):
     if weekday > 4:
         timedelta = 1
         weekday = 0
-    food_plan = get_week_data(get_week_source(datetime.date.today() + datetime.timedelta(days=timedelta)))
+    food_plan = get_week_data(get_week_source(datetime.date.today() + datetime.timedelta(weeks=timedelta)))
     message = ""
     message += "***" + calendar.day_name[weekday] + "***\n"
     food_plan_day = food_plan[weekday + 1]
