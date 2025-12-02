@@ -1,3 +1,4 @@
+from discord import app_commands
 from dotenv import load_dotenv
 import os
 import discord
@@ -70,6 +71,56 @@ async def food_next_command(interaction: discord.Interaction):
 
     await interaction.response.send_message(message)
 
+
+@client.tree.command(name="euklid", description="Euklid")
+@app_commands.describe(
+    a="zahl1",
+    b="zahl2",
+)
+async def euklid_command(interaction: discord.Interaction, a: int, b: int):
+    message = "```"
+
+    result = euklid(a, b)
+    table = PrettyTable(["i", "a", "b", "q", "r"])
+    for i, value in result.items():
+        if i == "result":
+            continue
+        table.add_row([i, *value.values()])
+    message += table.get_string()
+    message += f"\nggt{a, b} = {result['result']}"
+
+    message += "```"
+
+    await interaction.response.send_message(message)
+
+
+@client.tree.command(name="extended-euklid", description="Extended Euklid")
+@app_commands.describe(
+    a="zahl1",
+    b="zahl2",
+)
+async def extended_euklid_command(interaction: discord.Interaction, a: int, b: int):
+    message = "```"
+
+    result_extended = extended_euklid(a, b)
+    table = PrettyTable(["i", "a", "b", "q", "r", "x", "y"])
+    for i, value in result_extended.items():
+        if isinstance(i, int):
+            x_val = value.get('x', '')
+            y_val = value.get('y', '')
+            table.add_row([i, value['a'], value['b'], value['q'], value['r'], x_val, y_val])
+
+    message += table.get_string()
+
+    ggt, x, y = result_extended['result']
+    if a < b:
+        a, b = b, a
+    message += f"\nggt({a}, {b}) = {ggt}"
+    message += f"\n{ggt} = {a} * {x} + {b} * {y}"
+
+    message += "```"
+
+    await interaction.response.send_message(message)
 
 if __name__ == '__main__':
     load_dotenv()

@@ -1,4 +1,3 @@
-from pprint import pprint
 from prettytable import PrettyTable
 
 def euklid(a, b):
