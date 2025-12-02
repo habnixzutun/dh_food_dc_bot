@@ -1,8 +1,11 @@
 from dotenv import load_dotenv
 import os
 import discord
-from site_scraper import *
 import calendar
+from prettytable import PrettyTable
+
+from site_scraper import *
+from euklid import *
 
 class MyClient(discord.Client):
     def __init__(self, *, intents: discord.Intents):
