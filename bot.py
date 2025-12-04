@@ -4,6 +4,7 @@ import os
 import discord
 import calendar
 from prettytable import PrettyTable
+from requests import get
 
 from math_christmas_tree import christmas_tree
 from site_scraper import *
@@ -205,6 +206,29 @@ async def dec_command(interaction: discord.Interaction, zahl: str):
 @client.tree.command(name="weihnachtsbaum", description="Gibt einen Weihnachtsbaum aus")
 async def christmastree_command(interaction: discord.Interaction):
     await interaction.response.send_message("```\n" + christmas_tree() + "\n```")
+
+
+@client.tree.command(name="leaderboard", description="Gibt das hexToBinTrainer Leaderboard zurück")
+async def leaderboard_command(interaction: discord.Interaction):
+    response = get(os.getenv("LEADERBOARD_ENDPOINT"))
+    if response.status_code != 200:
+        await interaction.response.send_message("Something went wrong :(")
+        return
+    raw = response.json()
+
+    table = PrettyTable(["Platz", "Name", "Richtig", "Falsch", "Punkte"])
+    for index, value in raw.items():
+        if index == 1:
+            value["index"] = "🏆"
+        elif index == 1:
+            value["index"] = "🥈"
+        elif index == 1:
+            value["index"] = "🥉"
+        table.add_row([value["index"], value["name"], value["correct"], value["wrong"], value["points"]])
+
+    message = "```\n" + table.get_string() + "\n```"
+
+    await interaction.response.send_message(message)
 
 
 if __name__ == '__main__':
