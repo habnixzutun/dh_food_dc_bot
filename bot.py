@@ -5,6 +5,7 @@ import discord
 import calendar
 from prettytable import PrettyTable
 
+from math_christmas_tree import christmas_tree
 from site_scraper import *
 from euklid import *
 
@@ -199,6 +200,11 @@ async def dec_command(interaction: discord.Interaction, zahl: str):
     message += f"**Hex:** {base16}\n"
 
     await interaction.response.send_message(message)
+
+
+@client.tree.command(name="weihnachtsbaum", description="Gibt einen Weihnachtsbaum aus")
+async def dec_command(interaction: discord.Interaction):
+    await interaction.response.send_message(christmas_tree())
 
 
 if __name__ == '__main__':
