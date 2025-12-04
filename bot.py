@@ -203,8 +203,8 @@ async def dec_command(interaction: discord.Interaction, zahl: str):
 
 
 @client.tree.command(name="weihnachtsbaum", description="Gibt einen Weihnachtsbaum aus")
-async def dec_command(interaction: discord.Interaction):
-    await interaction.response.send_message(christmas_tree())
+async def christmastree_command(interaction: discord.Interaction):
+    await interaction.response.send_message("```\n" + christmas_tree() + "\n```")
 
 
 if __name__ == '__main__':
