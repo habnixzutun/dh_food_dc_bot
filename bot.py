@@ -122,6 +122,85 @@ async def extended_euklid_command(interaction: discord.Interaction, a: int, b: i
 
     await interaction.response.send_message(message)
 
+
+@client.tree.command(name="hex", description="Nimmt eine Hexadezimalzahl an und rechnet sie in alles mögliche um")
+@app_commands.describe(
+    zahl="zahl",
+)
+async def hex_command(interaction: discord.Interaction, zahl: str):
+    orig_base16 = zahl
+    message = ""
+
+    try:
+        base10 = str(int(orig_base16, 16))
+        base2 = bin(int(orig_base16, 16))
+        base8 = oct(int(orig_base16, 16))
+        base16 = hex(int(orig_base16, 16))
+    except ValueError:
+        await interaction.response.send_message(f"'*{orig_base16}*' is not a hex number")
+        return
+
+    message += f"**Deine Zahl**: {orig_base16}\n"
+    message += f"**Bin:** {base2}\n"
+    message += f"**Oct:** {base8}\n"
+    message += f"**Dec:** {base10}\n"
+    message += f"**Hex:** {base16}\n"
+
+    await interaction.response.send_message(message)
+
+
+@client.tree.command(name="bin", description="Nimmt eine Binärzahl an und rechnet sie in alles mögliche um")
+@app_commands.describe(
+    zahl="zahl",
+)
+async def bin_command(interaction: discord.Interaction, zahl: str):
+    orig_base2 = zahl
+    message = ""
+
+    try:
+        base10 = str(int(orig_base2, 2))
+        base2 = bin(int(orig_base2, 2))
+        base8 = oct(int(orig_base2, 2))
+        base16 = hex(int(orig_base2, 2))
+    except ValueError:
+        await interaction.response.send_message(f"'*{orig_base2}*' is not a bin number")
+        return
+
+    message += f"**Deine Zahl**: {orig_base2}\n"
+    message += f"**Bin:** {base2}\n"
+    message += f"**Oct:** {base8}\n"
+    message += f"**Dec:** {base10}\n"
+    message += f"**Hex:** {base16}\n"
+
+    await interaction.response.send_message(message)
+
+
+@client.tree.command(name="dec", description="Nimmt eine Dezimalzahl an und rechnet sie in alles mögliche um")
+@app_commands.describe(
+    zahl="zahl",
+)
+async def dec_command(interaction: discord.Interaction, zahl: str):
+    orig_base10 = zahl
+    message = ""
+
+    try:
+        base10 = str(int(orig_base10, 10))
+        base2 = bin(int(orig_base10, 10))
+        base8 = oct(int(orig_base10, 10))
+        base16 = hex(int(orig_base10, 10))
+    except ValueError:
+        await interaction.response.send_message(f"'*{orig_base10}*' is not a dec number")
+        return
+
+    message += f"**Deine Zahl**: {orig_base10}\n"
+    message += f"**Bin:** {base2}\n"
+    message += f"**Oct:** {base8}\n"
+    message += f"**Dec:** {base10}\n"
+    message += f"**Hex:** {base16}\n"
+
+    await interaction.response.send_message(message)
+
+
 if __name__ == '__main__':
     load_dotenv()
     dc_token = os.getenv('DC_TOKEN')
