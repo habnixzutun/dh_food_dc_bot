@@ -6,11 +6,6 @@ FROM python:3.11-slim
 # Setze das Arbeitsverzeichnis im Container
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    libopus-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 # Kopiere die requirements.txt-Datei
 COPY requirements.txt .
 
