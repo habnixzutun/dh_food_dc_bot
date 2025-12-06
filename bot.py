@@ -82,7 +82,7 @@ async def food_next_command(interaction: discord.Interaction):
     b="zahl2",
 )
 async def euklid_command(interaction: discord.Interaction, a: int, b: int):
-    message = "```"
+    message = "```\n"
 
     result = euklid(a, b)
     table = PrettyTable(["i", "a", "b", "q", "r"])
@@ -93,7 +93,7 @@ async def euklid_command(interaction: discord.Interaction, a: int, b: int):
     message += table.get_string()
     message += f"\nggt{a, b} = {result['result']}"
 
-    message += "```"
+    message += "\n```"
 
     await interaction.response.send_message(message)
 
@@ -104,7 +104,7 @@ async def euklid_command(interaction: discord.Interaction, a: int, b: int):
     b="zahl2",
 )
 async def extended_euklid_command(interaction: discord.Interaction, a: int, b: int):
-    message = "```"
+    message = "```\n"
 
     result_extended = extended_euklid(a, b)
     table = PrettyTable(["i", "a", "b", "q", "r", "x", "y"])
@@ -122,7 +122,7 @@ async def extended_euklid_command(interaction: discord.Interaction, a: int, b: i
     message += f"\nggt({a}, {b}) = {ggt}"
     message += f"\n{ggt} = {a} * {x} + {b} * {y}"
 
-    message += "```"
+    message += "\n```"
 
     await interaction.response.send_message(message)
 
